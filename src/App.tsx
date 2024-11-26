@@ -1,19 +1,26 @@
-import clsx from 'clsx'
-import { useState } from 'react'
-import { HomeBtn } from './components'
-const stylesOfContainer = {
-    base: 'min-w-[100vw] min-h-screen bg-slate-100 flex justify-center items-center flex-col gap-2 relative',
-    mobile: ' flex-col gap-2 p-2',
-    tablet: '',
-    laptab: '',
-}
-
+import { BrowserRouter, Route, Routes } from 'react-router'
+import { Home, Menu } from './components'
+import React from 'react'
 const App = () => {
-    const [menuBtnActive] = useState<boolean>(false)
+    const routes: {
+        title: string
+        path: string
+        component: React.JSX.Element
+    }[] = [{ component: <Home />, path: '/', title: 'home' }]
     return (
-        <div className={clsx(stylesOfContainer.base)}>
-            <HomeBtn />
-            <div className={clsx()}></div>
+        <div className='min-h-screen min-w-[100vw]'>
+            <BrowserRouter>
+                <Routes>
+                    {routes.map(route => (
+                        <Route
+                            key={route.title}
+                            path={route.path}
+                            element={route.component}
+                        />
+                    ))}
+                </Routes>
+                <Menu />
+            </BrowserRouter>
         </div>
     )
 }

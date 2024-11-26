@@ -1,52 +1,62 @@
 import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import tseslint from 'typescript-eslint'
-import prettier from 'eslint-plugin-prettier'
-import react from 'eslint-plugin-react'
 import js from '@eslint/js'
+import tsPlugin from '@typescript-eslint/eslint-plugin'
+import tsParser from '@typescript-eslint/parser'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooksPlugin from 'eslint-plugin-react-hooks'
+import reactRefreshPlugin from 'eslint-plugin-react-refresh'
+import prettierPlugin from 'eslint-plugin-prettier'
+import prettierConfig from 'eslint-config-prettier'
 
 export default [
-    js.configs.recommended,
     {
-        ignores: ['dist'],
-        files: ['**/*.{ts,tsx}'],
+        files: ['**/*.{js,jsx,ts,tsx}'],
         languageOptions: {
-            ecmaVersion: 'latest',
-            sourceType: 'module',
             globals: {
                 ...globals.browser,
-                ...globals.es2021,
+                ...globals.es2024,
                 ...globals.node,
             },
+            parser: tsParser,
             parserOptions: {
+                ecmaVersion: 'latest',
+                sourceType: 'module',
                 ecmaFeatures: {
                     jsx: true,
                 },
             },
-            parser: tseslint.parser,
         },
         plugins: {
-            react,
-            prettier,
-            'react-hooks': reactHooks,
+            '@typescript-eslint': tsPlugin,
+            react: reactPlugin,
+            'react-hooks': reactHooksPlugin,
+            'react-refresh': reactRefreshPlugin,
+            prettier: prettierPlugin,
         },
         rules: {
-            'prettier/prettier': [
-                'error',
-                {
-                    endOfLine: 'auto',
-                },
+            ...js.configs.recommended.rules,
+            ...tsPlugin.configs['recommended'].rules,
+            ...reactPlugin.configs.recommended.rules,
+            ...reactHooksPlugin.configs.recommended.rules,
+            ...prettierConfig.rules,
+            'react-refresh/only-export-components': [
+                'warn',
+                { allowConstantExport: true },
             ],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                { argsIgnorePattern: '^_' },
+            ],
+            '@typescript-eslint/no-explicit-any': 'warn',
             'react/react-in-jsx-scope': 'off',
             'react/prop-types': 'off',
-            'react-hooks/rules-of-hooks': 'error',
-            'react-hooks/exhaustive-deps': 'warn',
-            'no-console': 'warn',
+            'prettier/prettier': ['error', {}, { usePrettierrc: true }],
         },
         settings: {
             react: {
                 version: 'detect',
             },
         },
+        ignores: ['dist/**', 'node_modules/**'],
     },
 ]

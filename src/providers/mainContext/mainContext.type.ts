@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ReactNode } from 'react'
 import IUser from '../../types/user'
 export interface IContextOutProp {

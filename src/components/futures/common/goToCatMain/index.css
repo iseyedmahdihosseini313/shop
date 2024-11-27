@@ -4,6 +4,6 @@
 .shadowCursor::before {
     box-shadow: 18px 18px 1px -6px #eceef0;
 }
-.shadowCursor2::before{
+.shadowCursor2::before {
     box-shadow: 21px 22px 1px -10px #eceef0;
 }

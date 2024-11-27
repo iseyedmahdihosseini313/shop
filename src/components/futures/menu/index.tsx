@@ -8,7 +8,7 @@ const menuItems: { src: string; title: string; dir: 'r' | 'l' }[] = [
 const Menu = () => {
     const [homeBtnActive, setHomeBtnActive] = useState<boolean>(false)
     const stylesOfContainer = {
-        base: 'min-w-[100vw] min-h-screen bg-slate-50 flex justify-center items-center flex-col gap-2 relative transition-all duration-700 *:transition-all *:duration-700 ',
+        base: 'z-50 min-w-[100vw] bg-slate-50 flex justify-center items-center flex-col gap-2 relative transition-all duration-700 *:transition-all *:duration-700 ',
         mobile: ' flex-col gap-2 p-2',
         tablet: '',
         laptab: '',

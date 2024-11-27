@@ -6,8 +6,8 @@ const MainMenuItem = ({ title, dir, homeBtnActive, src }: IMainMenuItem) => {
     const style = {
         dir: dir === 'r' ? 'right-8' : 'left-8',
         visibility: !homeBtnActive && 'hidden',
-        base: 'fixed flex justify-center items-center p-2 bottom-1 min-w-44 min-h-12 rounded-full tracking-widest ring-2 ring-slate-200',
-        titleStyle: 'text-center text-2xl text-gray-500 ',
+        base: 'fixed flex justify-center items-center p-2 bottom-1 min-w-32 min-h-12 rounded-full tracking-widest ring-2 ring-slate-200',
+        titleStyle: 'text-center text-xl text-gray-500 ',
     }
     return (
         <Link
